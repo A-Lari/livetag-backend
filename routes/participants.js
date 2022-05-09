@@ -1,22 +1,14 @@
 var express = require("express");
+
+const participants = require("../controllers/Participant");
+const checkAuth = require("./checkAuth");
+
 var router = express.Router();
 
-const Participant = require("../models/Participants");
-const Role = require("../models/Roles");
-const Event = require("../models/Events");
-const Activities = require("../models/Activities");
-
-/* GET users listing. */
-router.get("/", function (req, res, next) {
-  Participant.find()
-    .populate(["role", "optional_activities", "event"])
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(500);
-    });
-});
+/* GET */
+router.get("/", participants.getAllParticipants);
+//router.get("/", checkAuth, participants.getAllParticipants);
+router.get("/:id", participants.getOneParticipant);
+//router.get("/:id", checkAuth, participants.getOneParticipant);
 
 module.exports = router;
