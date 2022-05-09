@@ -10,5 +10,10 @@ router.get("/", participants.getAllParticipants);
 //router.get("/", checkAuth, participants.getAllParticipants);
 router.get("/:id", participants.getOneParticipant);
 //router.get("/:id", checkAuth, participants.getOneParticipant);
+router.get("/byname/:firstname/:lastname", participants.getParticipantByName); // NO OK
+router.get("/byemail/:email", participants.getParticipantByEmail);
+
+/* POST */
+router.post("/", participants.createParticipant);
 
 module.exports = router;
