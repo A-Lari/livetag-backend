@@ -8,6 +8,7 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+
 const participantsRouter = require("./routes/participants");
 const authRouter = require("./routes/auth");
 
