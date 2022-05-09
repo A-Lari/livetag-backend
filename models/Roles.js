@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const RoleSchema = new mongoose.Schema(
   {
     role_name: String,
-    activities: [{ type: mongoose.Types.ObjectId, ref: "Activity" }],
+    activities: [{ type: mongoose.Types.ObjectId, ref: "activities" }],
     event: { type: mongoose.Types.ObjectId, ref: "Event" },
   },
   { timestamps: true }

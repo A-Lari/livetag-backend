@@ -7,7 +7,7 @@ const ParticipantSchema = new mongoose.Schema(
     email: String,
     telephone: String,
     role: { type: mongoose.Types.ObjectId, ref: "Role" },
-    optional_activities: [{ type: mongoose.Types.ObjectId, ref: "Activity" }],
+    optional_activities: [{ type: mongoose.Types.ObjectId, ref: "Activities" }],
     event: { type: mongoose.Types.ObjectId, ref: "Event" },
   },
   { timestamps: true }
