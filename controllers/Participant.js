@@ -82,7 +82,21 @@ const participants = {
       .then((result) => {
         res.send(`Participant created`);
       })
-      .catch((error) => console.log("Error create participant : ", error));
+      .catch((error) => {
+        console.log("Error create participant : ", error);
+        res.sendStatus(500);
+      });
+  },
+
+  deleteParticipant(req, res) {
+    ParticipantModel.findByIdAndDelete(req.params.id)
+      .then(() => {
+        res.send(`Participant deleted`);
+      })
+      .catch((error) => {
+        console.log("Error delete participant : ", error);
+        res.sendStatus(500);
+      });
   },
 };
 
