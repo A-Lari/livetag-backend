@@ -12,6 +12,7 @@ const participantsRouter = require("./routes/participants");
 const activitiesRouter = require("./routes/activities");
 const authRouter = require("./routes/auth");
 const eventsRouter = require("./routes/events");
+const roleRouter = require("./routes/roles");
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use("/participants", participantsRouter);
 app.use("/activities", activitiesRouter);
 app.use("/users", usersRouter);
 app.use("/events", eventsRouter);
+app.use('/roles', roleRouter);
 app.use(express.static(path.join(__dirname, "public")));
 
 module.exports = app;
