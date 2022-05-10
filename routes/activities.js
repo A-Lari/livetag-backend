@@ -3,7 +3,7 @@ var router = express.Router();
 const ActivitiesModel = require("../models/Activities");
 const { checkAuth } = require("./checkAuth");
 
-/* GET activities page and create*/
+/* GET activities page*/
 router.get("/", checkAuth, function (req, res) {
   ActivitiesModel.find().then((result) => {
     console.log(result);
