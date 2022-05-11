@@ -1,4 +1,7 @@
 const EventsModel = require("../models/Events");
+const ShortUniqueId = require("short-unique-id");
+
+const uid = new ShortUniqueId({ length: 5 });
 
 const eventController = {
   createEvent(req, res) {
@@ -12,7 +15,7 @@ const eventController = {
       end_date,
       place,
       description,
-      code,
+      code: uid(),
       user: req.user._id,
     })
       .then(() => {
