@@ -2,36 +2,21 @@ let express = require("express");
 let router = express.Router();
 const EventsModel = require("../models/Events");
 const { checkAuth } = require("./checkAuth");
+const eventController = require("../controllers/Events");
 
 /* POST events. */
-router.post("/", checkAuth, function (req, res) {
-  const { event_name, start_date, end_date, place, description, code } =
-    req.body;
-  if (!event_name || !start_date || !end_date || !place || !description)
-    return res.sendStatus(400);
-  EventsModel.create({
-    event_name,
-    start_date,
-    end_date,
-    place,
-    description,
-    code,
-    user: req.user._id,
-  })
-    .then(() => {
-      console.log("Succesfully sent to DB");
-      res.send("Client bien reçu en DB");
-    })
-    .catch(() => {
-      res.sendStatus(500);
-    });
-});
+router.post("/", checkAuth, eventController.createEvent);
 
 /* GET events listing. */
-router.get("/", checkAuth, function (req, res, next) {
-  EventsModel.find().then((result) => {
-    res.send(result);
-  });
-});
+router.get("/", checkAuth, eventController.getEvent);
+
+/* GET event by ID. */
+router.get("/:id", checkAuth, eventController.getEventById);
+
+/* DELETE events by ID. */
+router.delete("/:id", checkAuth, eventController.deleteEvent);
+
+/* UPDATE events by ID. */
+router.post("/:id", checkAuth, eventController.updateEvent);
 
 module.exports = router;
