@@ -2,16 +2,22 @@ const RoleModel = require("../models/Roles");
 
 const roleController = {
 
-  //TODO Ajouter une query pour rechercher les roles pour un event id
+  // Retoune les liste des roles pour un evennement
   getRoles(req, res) {
-    console.log("==========> getRoles");
-    RoleModel.find()
+    const idEvent = req.query.idEvent;
+    console.log("==========> getRoles idEvent=", idEvent);
+    if (!idEvent || idEvent === "") return res.sendStatus(400);
+    const query = {event: idEvent};
+    console.log("query=", query);
+
+    RoleModel.find(query)
       .populate(["activities"])
       .then((roles) => {
         res.send(roles);
       });    
   },
 
+  // Retoune un role pour un id donnée
   getRole(req, res) {
     console.log("==========> getRole");
     const idRole = req.params.idRole;
@@ -23,6 +29,7 @@ const roleController = {
       });
   },
 
+  // Créer un role pour un evennement
   createRole(req, res) {
     console.log("==========> createRole");
     console.log(req.body);
@@ -43,6 +50,7 @@ const roleController = {
       .catch(() => res.sendStatus(500));
   },
 
+  // Supprimer un role pour un id donnée
   deleteRole(req, res) {
     console.log("==========> deleteRole");
     const idRole = req.params.idRole;
@@ -54,6 +62,7 @@ const roleController = {
       });
   },
 
+  //TODO a t'on besoin de mettre à jour l'event?
   updateRole(req, res) {
     console.log("==========> updateRole");
     const idRole = req.params.idRole;
