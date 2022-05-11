@@ -16,6 +16,9 @@ router.get("/byemail/:email", participants.getParticipantByEmail);
 /* POST */
 router.post("/", participants.createParticipant);
 
+/* PUT */
+router.put("/:id", participants.updateParticipant);
+
 /* DELETE */
 router.delete("/:id", participants.deleteParticipant);
 

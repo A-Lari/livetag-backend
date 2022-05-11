@@ -88,6 +88,39 @@ const participants = {
       });
   },
 
+  /* PUT */
+  updateParticipant(req, res) {
+    const {
+      firstname,
+      lastname,
+      email,
+      telephone,
+      role,
+      optional_activities,
+      event,
+    } = req.body;
+
+    const updateData = {
+      firstname,
+      lastname,
+      email,
+      telephone,
+      role,
+      optional_activities,
+      event,
+    };
+    console.log(updateData);
+    ParticipantModel.findByIdAndUpdate(req.params.id, updateData)
+      .then(() => {
+        res.send(`Participant updated`);
+      })
+      .catch((error) => {
+        console.log("Error create participant : ", error);
+        res.sendStatus(500);
+      });
+  },
+
+  /* DELETE */
   deleteParticipant(req, res) {
     ParticipantModel.findByIdAndDelete(req.params.id)
       .then(() => {
