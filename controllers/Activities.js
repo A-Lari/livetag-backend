@@ -2,7 +2,13 @@ const ActivitiesModel = require("../models/Activities");
 
 const activities = {
   getAllActivities(req, res) {
-    ActivitiesModel.find().then((result) => {
+    const idEvent = req.query.idEvent;
+    console.log("==========> getActivities idEvent=", idEvent);
+    if (!idEvent || idEvent === "") return res.sendStatus(400);
+    const query = { event: idEvent };
+    console.log("query=", query);
+
+    ActivitiesModel.find(query).then((result) => {
       console.log(result);
       res.send(result);
     });
@@ -40,16 +46,25 @@ const activities = {
   },
 
   createActivities(req, res) {
-    const { activity_name, activity_date, description, price, event } =
-      req.body;
+    const {
+      activity_name,
+      activity_date,
+      description,
+      price = 0,
+      event,
+    } = req.body;
+
+    // check variables
+    if (!activity_name || !event) return res.sendStatus(400);
 
     ActivitiesModel.create({
       activity_name,
       activity_date,
       description,
       price,
-      // event: req.event.id,
+      event,
     })
+
       .then(() => {
         res.sendStatus(201);
       })
