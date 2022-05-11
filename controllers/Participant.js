@@ -78,8 +78,8 @@ const participants = {
       event,
     });
 
-    ParticipantModel.create(ParticipantModel)
-      .then((result) => {
+    ParticipantModel.create(newParticipant)
+      .then(() => {
         res.send(`Participant created`);
       })
       .catch((error) => {
