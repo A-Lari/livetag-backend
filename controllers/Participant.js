@@ -18,7 +18,7 @@ const participants = {
   },
 
   getOneParticipant(req, res) {
-    ParticipantModel.find({ _id: req.params.id })
+    ParticipantModel.findById(req.params.id)
       .populate(["role", "optional_activities", "event"])
       .then((result) => {
         res.send(result);
