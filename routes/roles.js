@@ -15,5 +15,6 @@ router.get("/", checkAuth, roleController.getRoles);
 router.get("/:idRole", checkAuth, roleController.getRole);
 router.delete("/:idRole", checkAuth, roleController.deleteRole);
 router.post("/:idRole", checkAuth, roleController.updateRole);
+router.get("/activities/:id/count", roleController.countRolesByActivity);
 
 module.exports = router;

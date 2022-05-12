@@ -22,4 +22,7 @@ router.put("/:id", participants.updateParticipant);
 /* DELETE */
 router.delete("/:id", participants.deleteParticipant);
 
+/* COUNT */
+router.get("/roles/:id/count", participants.countParticipantsByRole);
+
 module.exports = router;
