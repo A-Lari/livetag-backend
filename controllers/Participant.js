@@ -131,6 +131,24 @@ const participants = {
         res.sendStatus(500);
       });
   },
+
+  /* COUNT */
+  countParticipantsByRole(req, res) {
+    const idRole = req.params.id;
+    if (!idRole || idRole === "") return res.sendStatus(400);
+    const query = {role: idRole};
+    console.log("countParticipantsByRole :: query=", query)
+    ParticipantModel.countDocuments(query)
+      .then((count) => {
+        console.log(count)
+        res.send(String(count));
+      })
+      .catch((error) => {
+        console.log("Error countParticipantsByRole", error);
+        res.sendStatus(500);
+      });
+  },
+
 };
 
 module.exports = participants;
