@@ -1,7 +1,7 @@
 var express = require("express");
 
 const participants = require("../controllers/Participant");
-const checkAuth = require("./checkAuth");
+const { checkAuth } = require("./checkAuth");
 
 var router = express.Router();
 
@@ -23,6 +23,6 @@ router.put("/:id", participants.updateParticipant);
 router.delete("/:id", participants.deleteParticipant);
 
 /* COUNT */
-router.get("/roles/:id/count", participants.countParticipantsByRole);
+router.get("/roles/:id/count", checkAuth, participants.countParticipantsByRole);
 
 module.exports = router;
