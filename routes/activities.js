@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const { checkAuth } = require("./checkAuth");
 const activities = require("../controllers/Activities");
+const checkBeforeDeleteActivity = require("../middlewares/checkBeforeDeleteActivity");
 
 /* GET activities page*/
 router.get("/", activities.getAllActivities);
@@ -10,7 +11,12 @@ router.get("/", activities.getAllActivities);
 router.get("/:id", checkAuth, activities.getActivitiesById);
 
 /* delete activities */
-router.delete("/:id", checkAuth, activities.deleteActivities);
+router.delete(
+  "/:id",
+  checkAuth,
+  checkBeforeDeleteActivity,
+  activities.deleteActivities
+);
 
 /*Update activities */
 router.post("/:idActivity", checkAuth, activities.updateActivities);
