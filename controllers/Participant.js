@@ -56,6 +56,19 @@ const participants = {
       });
   },
 
+  getParticipantByEvent(req, res) {
+    const idEvent = req.params.idEvent;
+    ParticipantModel.find({ event: idEvent })
+      .populate(["role", "optional_activities", "event"])
+      .then((result) => {
+        res.send(result);
+      })
+      .catch((error) => {
+        console.log("Error getByEvent participant:", error);
+        res.sendStatus(500);
+      });
+  },
+
   /* POST */
   createParticipant(req, res) {
     const {
@@ -136,11 +149,11 @@ const participants = {
   countParticipantsByRole(req, res) {
     const idRole = req.params.id;
     if (!idRole || idRole === "") return res.sendStatus(400);
-    const query = {role: idRole};
-    console.log("countParticipantsByRole :: query=", query)
+    const query = { role: idRole };
+    console.log("countParticipantsByRole :: query=", query);
     ParticipantModel.countDocuments(query)
       .then((count) => {
-        console.log(count)
+        console.log(count);
         res.send(String(count));
       })
       .catch((error) => {
@@ -148,7 +161,6 @@ const participants = {
         res.sendStatus(500);
       });
   },
-
 };
 
 module.exports = participants;

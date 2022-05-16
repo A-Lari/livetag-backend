@@ -12,6 +12,7 @@ router.get("/:id", participants.getOneParticipant);
 //router.get("/:id", checkAuth, participants.getOneParticipant);
 router.get("/byname/:firstname/:lastname", participants.getParticipantByName); // NO OK
 router.get("/byemail/:email", participants.getParticipantByEmail);
+router.get("/byevent/:idEvent", participants.getParticipantByEvent);
 
 /* POST */
 router.post("/", participants.createParticipant);
