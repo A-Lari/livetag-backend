@@ -4,9 +4,9 @@ let router = express.Router();
 const mobileController = require("../controllers/Mobile");
 
 /* GET events listing. */
-router.get("/:code", mobileController.getEventByCode);
+router.get("/events/:code", mobileController.getEventByCode);
 
 /*Get participant */
-router.get("/:idParticipant", mobileController.getParticipantById);
+router.get("/participants/:id", mobileController.getParticipantById);
 
 module.exports = router;
