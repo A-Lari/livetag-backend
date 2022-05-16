@@ -4,7 +4,7 @@ const ParticipantModel = require("../models/Participants");
 const MobileController = {
   getEventByCode(req, res) {
     const code = req.params.code;
-    console.log("je suis l'event", code);
+    console.log("getEventByCode", code);
 
     EventsModel.findOne({ code }).then((result) => {
       res.send(result);
@@ -12,12 +12,19 @@ const MobileController = {
   },
 
   getParticipantById(req, res) {
-    const idParticipant = req.params.data._id;
-    console.log("je suis le participant", idParticipant);
+    const idParticipant = req.params.id;
+    console.log(" getParticipantById", idParticipant);
 
-    ParticipantModel.findOne({ idParticipant }).then((result) => {
-      res.send(result);
-    });
+    ParticipantModel.findById(idParticipant)
+
+      .populate(["role", "optional_activities", "event"])
+      .then((result) => {
+        res.send(result);
+      })
+      .catch((error) => {
+        console.log("Error getParticipantById :", error);
+        res.sendStatus(500);
+      });
   },
 };
 
