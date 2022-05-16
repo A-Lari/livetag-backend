@@ -13,7 +13,7 @@ const MobileController = {
 
   getParticipantById(req, res) {
     const idParticipant = req.params.id;
-    console.log(" getParticipantById", idParticipant);
+    console.log("getParticipantById", idParticipant);
 
     ParticipantModel.findById(idParticipant)
 
