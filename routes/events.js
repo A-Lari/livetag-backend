@@ -3,6 +3,7 @@ let router = express.Router();
 const EventsModel = require("../models/Events");
 const { checkAuth } = require("./checkAuth");
 const eventController = require("../controllers/Events");
+const checkBeforeDeleteEvent = require("../middlewares/checkBeforeDeleteEvent");
 
 /* POST events. */
 router.post("/", checkAuth, eventController.createEvent);
@@ -14,7 +15,12 @@ router.get("/", checkAuth, eventController.getEvent);
 router.get("/:id", checkAuth, eventController.getEventById);
 
 /* DELETE events by ID. */
-router.delete("/:id", checkAuth, eventController.deleteEvent);
+router.delete(
+  "/:id",
+  checkAuth,
+  checkBeforeDeleteEvent,
+  eventController.deleteEvent
+);
 
 /* UPDATE events by ID. */
 router.post("/:id", checkAuth, eventController.updateEvent);
