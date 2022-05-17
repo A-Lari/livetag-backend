@@ -31,4 +31,6 @@ router.get(
   activities.searchActivitiesByTitle
 );
 
+router.get("/roles/:idRole/optional_activities", activities.getOptionalActivities);
+
 module.exports = router;
