@@ -9,4 +9,10 @@ router.get("/events/:code", mobileController.getEventByCode);
 /*Get participant */
 router.get("/participants/:id", mobileController.getParticipantById);
 
+/*Get activities */
+router.get("/activities/:id", mobileController.getActivitiesById);
+
+/*Get All activities */
+router.get("/activities", mobileController.getActivitiesByEvent);
+
 module.exports = router;
