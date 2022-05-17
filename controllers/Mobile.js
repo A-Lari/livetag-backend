@@ -1,5 +1,6 @@
 const EventsModel = require("../models/Events");
 const ParticipantModel = require("../models/Participants");
+const ActivitiesModel = require("../models/Activities");
 
 const MobileController = {
   getEventByCode(req, res) {
@@ -23,6 +24,26 @@ const MobileController = {
       })
       .catch((error) => {
         console.log("Error getParticipantById :", error);
+        res.sendStatus(500);
+      });
+  },
+
+  getActivitiesById(req, res) {
+    ActivitiesModel.findById(req.params.id).then((result) => {
+      console.log(result);
+      res.send(result);
+    });
+  },
+
+  getActivitiesByEvent(req, res) {
+    const idEvent = req.params;
+    console.log("????getActivities????", idEvent);
+    ActivitiesModel.find({ event: idEvent })
+      .then((result) => {
+        res.send(result);
+      })
+      .catch((error) => {
+        console.log("Error :", error);
         res.sendStatus(500);
       });
   },
