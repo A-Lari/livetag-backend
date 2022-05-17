@@ -15,6 +15,7 @@ const eventsRouter = require("./routes/events");
 const roleRouter = require("./routes/roles");
 const mobileRouter = require("./routes/mobile");
 const inscriptionsRouter = require("./routes/inscriptions");
+const qrCodeRouter = require("./routes/qrCode")
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use("/events", eventsRouter);
 app.use("/roles", roleRouter);
 app.use("/mobile", mobileRouter);
 app.use("/inscriptions", inscriptionsRouter);
+app.use("/qrcode", qrCodeRouter);
 app.use(express.static(path.join(__dirname, "public")));
 
 module.exports = app;
