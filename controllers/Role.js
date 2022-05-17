@@ -1,4 +1,7 @@
 const RoleModel = require("../models/Roles");
+const ShortUniqueId = require("short-unique-id");
+const uid = new ShortUniqueId({ length: 10 });
+const API_URL = process.env.API_URL;
 
 const roleController = {
   /* GET roles */
@@ -82,6 +85,24 @@ const roleController = {
         res.sendStatus(500);
       });
   },
+
+  /* Generate link */
+  generateInscriptionLink(req, res) {
+    const idRole = req.params.idRole;
+    console.log("generateInscriptionLink", idRole);
+    const uniqueCodeForLink = uid();
+    const link = `${API_URL}/inscriptions/${uniqueCodeForLink}`;
+    const update = { link };
+    RoleModel.findOneAndUpdate({ _id: idRole }, update, { new: true })
+      .then((result) => {
+        res.send(result);
+      })
+      .catch((error) => {
+        console.log("Error generateInscriptionLink", error);
+        res.sendStatus(500);
+      });
+  },
+
 };
 
 module.exports = roleController;
