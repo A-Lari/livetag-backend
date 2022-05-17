@@ -10,6 +10,7 @@ const roleController = require("../controllers/Role");
 
 const { checkAuth } = require("./checkAuth");
 const checkBeforeDeleteRole = require("../middlewares/checkBeforeDeleteRole");
+const checkInscriptionLink = require("../middlewares/checkInscriptionLink")
 
 router.post("/", checkAuth, roleController.createRole);
 router.get("/", checkAuth, roleController.getRoles);
@@ -21,5 +22,6 @@ router.delete(
   roleController.deleteRole
 );
 router.post("/:idRole", checkAuth, roleController.updateRole);
+router.post("/:idRole/link", checkInscriptionLink, roleController.generateInscriptionLink);
 
 module.exports = router;
