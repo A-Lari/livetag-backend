@@ -1,4 +1,5 @@
 const ActivitiesModel = require("../models/Activities");
+const RoleModel = require("../models/Roles");
 
 const activities = {
   getAllActivities(req, res) {
@@ -80,6 +81,28 @@ const activities = {
       console.log(activityList);
       res.send(activityList);
     });
+  },
+
+  getOptionalActivities(req, res) {
+    const idRole = req.params.idRole;
+    console.log("getOptionalActivities :: idRole=", idRole);
+    RoleModel.findById(idRole)
+      .then((role) => {
+        const eventId = role.event;
+        const roleActivities = role.activities;
+        //On recherche les activités qui appartiennent à l'event et qui ne font pas parties des activités du rôle
+        const query = { $and: [{ event: eventId }, {_id: { $nin: roleActivities }}] }
+        console.log(query);
+        ActivitiesModel.find(query).then((result) => {
+          console.log(result);
+          res.send(result);
+        });
+
+      })
+      .catch((error) => {
+        console.log("Error getRole", error);
+        res.sendStatus(500);
+      });
   },
 };
 
