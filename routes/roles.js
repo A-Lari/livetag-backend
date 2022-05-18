@@ -23,5 +23,6 @@ router.delete(
 );
 router.post("/:idRole", checkAuth, roleController.updateRole);
 router.post("/:idRole/link", checkInscriptionLink, roleController.generateInscriptionLink);
+router.get("/search/:idLink", roleController.searchRoleByLink);
 
 module.exports = router;
