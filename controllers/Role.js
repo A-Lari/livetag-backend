@@ -103,6 +103,19 @@ const roleController = {
       });
   },
 
+  searchRoleByLink(req, res) {
+    const idLink = req.params.idLink;
+    console.log("searchRoleByLink", idLink);
+    const link = `${API_URL}/inscriptions/${idLink}`;
+    const query = { link };
+    RoleModel.findOne(query)
+      .populate(["activities", "event"])
+      .then((roles) => {
+        console.log(roles);
+        res.send(roles);
+      });
+  },
+
 };
 
 module.exports = roleController;

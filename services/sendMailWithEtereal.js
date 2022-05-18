@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const dayjs = require("dayjs");
 
 async function sendMailWithEtereal(participant, urlQrCode) {
     if(participant) {
@@ -22,9 +23,9 @@ async function sendMailWithEtereal(participant, urlQrCode) {
         let info = await transporter.sendMail({
             from: '"LiveTag app" <livetag_app@hotmail.com>', // sender address (who sends)
             to: participant.email, // list of receivers
-            subject: `${participant.event.event_name} à ${participant.event.place}`, // Subject line
-            text: `${participant.lastname} ${participant.firstname}, email: ${participant.email}, tel: ${participant.telephone}: ${urlQrCode}`, // plain text body
-            html: `<p>${participant.lastname} ${participant.firstname}, email: ${participant.email}, tel: ${participant.telephone}</p><img src="${urlQrCode}" alt="" />`, // html body
+            subject: `${participant.event.event_name} à ${participant.event.place} du ${dayjs(participant.event.start_date).format('DD/MM/YYYY')} au ${dayjs(participant.event.end_date).format('DD/MM/YYYY')}`, // Subject line
+            text: `${participant.role.role_name}, ${participant.lastname} ${participant.firstname}, email: ${participant.email}, tel: ${participant.telephone}: ${urlQrCode}`, // plain text body
+            html: `<p>${participant.role.role_name}</p><p>${participant.lastname} ${participant.firstname}, email: ${participant.email}, tel: ${participant.telephone}</p><img src="${urlQrCode}" alt="" />`, // html body
         });
 
         console.log("Message sent: %s", info.messageId);
