@@ -36,8 +36,11 @@ const MobileController = {
   },
 
   getActivitiesByEvent(req, res) {
-    const idEvent = req.params;
+    const idEvent = req.query.idEvent;
     console.log("????getActivities????", idEvent);
+
+    if (!idEvent) return res.sendStatus(400);
+
     ActivitiesModel.find({ event: idEvent })
       .then((result) => {
         res.send(result);
