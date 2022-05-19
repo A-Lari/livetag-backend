@@ -6,13 +6,7 @@ const { checkAuth } = require("./checkAuth");
 
 router.get("/", checkAuth, users.getUsers);
 
-// router.put("/", checkAuth, users.modifyCurrentUser);
-
-// router.post("/", users.createUser);
-// router.get("/id/:id", users.getUserById);
-// router.put("/id/:id", users.modifyUsersById);
-// router.delete("/id/:id", users.deleteUserById);
-
-// router.get("/name/:lastname", users.getUserByLastname);
+router.put("/data", checkAuth, users.putUserUserData);
+router.put("/pwd", checkAuth, users.putUserUserPassword);
 
 module.exports = router;
