@@ -14,6 +14,8 @@ router.get("/", checkAuth, eventController.getEvent);
 /* GET event by ID. */
 router.get("/:id", checkAuth, eventController.getEventById);
 
+router.get("/user/:idUser", checkAuth, eventController.getEventOfUser);
+
 /* DELETE events by ID. */
 router.delete(
   "/:id",

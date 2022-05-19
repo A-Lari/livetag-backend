@@ -35,11 +35,24 @@ const eventController = {
 
   getEventById(req, res) {
     const idEvent = req.params.id;
-    console.log(idEvent);
     EventsModel.findById(idEvent).then((result) => {
       console.log("evennement affiché", result);
       res.send(result);
     });
+  },
+
+  getEventOfUser(req, res) {
+    const idUser = req.params.idUser;
+
+    EventsModel.find({ user: idUser })
+      .then((result) => {
+        console.log("evennements affichés", result);
+        res.send(result);
+      })
+      .catch((error) => {
+        console.log("Error getEventOfUser", error);
+        res.sendStatus(500);
+      });
   },
 
   deleteEvent(req, res) {
