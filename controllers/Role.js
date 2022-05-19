@@ -11,6 +11,7 @@ const roleController = {
     const query = { event: idEvent };
     RoleModel.find(query)
       .populate(["activities"])
+      .sort({ updatedAt: -1 })
       .then((roles) => {
         res.send(roles);
       })
@@ -115,7 +116,6 @@ const roleController = {
         res.send(roles);
       });
   },
-
 };
 
 module.exports = roleController;

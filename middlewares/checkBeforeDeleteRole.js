@@ -12,7 +12,7 @@ const checkBeforeDeleteRole = (req, res, next) => {
         res
           .status(401)
           .send(
-            "Role utilisé par les participants, vous ne pouvez pas le supprimer"
+            "Rôle associé à un participant, vous ne pouvez pas le supprimer"
           );
       } else next();
     })
