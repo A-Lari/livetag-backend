@@ -6,7 +6,7 @@ const { checkAuth } = require("./checkAuth");
 
 router.get("/", checkAuth, users.getUsers);
 
-router.put("/data", checkAuth, users.putUserUserData);
-router.put("/pwd", checkAuth, users.putUserUserPassword);
+router.put("/data", checkAuth, users.putUserData);
+router.put("/pwd", checkAuth, users.putUserPassword);
 
 module.exports = router;

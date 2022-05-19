@@ -8,7 +8,7 @@ const users = {
     });
   },
 
-  putUserUserData(req, res) {
+  putUserData(req, res) {
     const organisation = req.body.organisation;
     const email = req.body.email;
 
@@ -19,7 +19,7 @@ const users = {
     //await UserModel.findByIdAndUpdate(req.user._id)
   },
 
-  putUserUserPassword(req, res) {
+  putUserPassword(req, res) {
     if (!password) return res.sendStatus(400);
     if (!confirmPassword) return res.sendStatus(400);
     // password = confirmPassword ?
