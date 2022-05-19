@@ -6,6 +6,10 @@ const dayjs = require("dayjs");
 const isBetween = require('dayjs/plugin/isBetween')
 dayjs.extend(isBetween);
 
+const sendMailWithEtereal = require("../services/sendMailWithEtereal");
+const sendMailWithOutlook = require("../services/sendMailWithOutlook")
+var qrCode = require("qrcode");
+
 const inscriptionController = {
 
   /* Check idlink and redirect to front-end for registration page*/
@@ -50,7 +54,22 @@ const inscriptionController = {
 
         ParticipantModel.create(newParticipant)
         .then((createdParticipant) => {
-          res.send(createdParticipant);
+
+          //Envoi du mail de confirmation au participant avec le Qrcode
+          const idParticipant = createdParticipant._id;
+          qrCode.toDataURL(JSON.stringify(idParticipant), function (err, url) {
+            ParticipantModel.findById(idParticipant)
+            .populate(["role", "optional_activities", "event"])
+            .then((participant) => {
+                sendMailWithEtereal(participant, url)
+                res.send(participant);
+            })
+            .catch((error) => {
+              console.log("Error send confirmation", error);
+              res.sendStatus(500);
+            });
+          });
+
         })
         .catch((error) => {
           console.log("Error create participant from inscription", error);
