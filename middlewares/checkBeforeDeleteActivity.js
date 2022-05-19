@@ -11,9 +11,7 @@ const checkBeforeDeleteActivity = (req, res, next) => {
       if (count > 0) {
         res
           .status(401)
-          .send(
-            "Activité associées à un role, vous ne pouvez pas le supprimer"
-          );
+          .send("Activité associée à un rôle, vous ne pouvez pas la supprimer");
       } else next();
     })
     .catch((error) => {
