@@ -37,7 +37,7 @@ const MobileController = {
 
   getActivitiesByEvent(req, res) {
     const idEvent = req.query.idEvent;
-    console.log("????getActivities????", idEvent);
+    console.log("getActivitiesByEvent", idEvent);
 
     if (!idEvent) return res.sendStatus(400);
 
