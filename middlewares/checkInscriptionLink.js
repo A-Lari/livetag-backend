@@ -11,8 +11,9 @@ const checkInscriptionLink = (req, res, next) => {
     .populate(["event"])
     .then((role) => {
       const start = Date.now();
-      if(dayjs(start).isBetween(role.event.start_date, role.event.end_date, 'day', '[]')) next();
-      else res.status(401).send("La date courante n'est plus incluse dans la période de l'evennement");
+      console.log("============= COMPARE DATE ===============", dayjs(start).isBefore(role.event.end_date));
+      if(dayjs(start).isBefore(role.event.end_date)) next();
+      else res.status(401).send("Date de fin de l'evennement atteinte ou dépassée");
     })
     .catch((error) => {
       console.log("Error checkInscriptionLink", error);
