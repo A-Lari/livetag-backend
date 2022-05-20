@@ -11,7 +11,6 @@ const checkInscriptionLink = (req, res, next) => {
     .populate(["event"])
     .then((role) => {
       const start = Date.now();
-      console.log("============= COMPARE DATE ===============", dayjs(start).isBefore(role.event.end_date));
       if(dayjs(start).isBefore(role.event.end_date)) next();
       else res.status(401).send("Date de fin de l'evennement atteinte ou dépassée");
     })
