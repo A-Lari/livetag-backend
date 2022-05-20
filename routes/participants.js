@@ -6,21 +6,25 @@ const { checkAuth } = require("./checkAuth");
 var router = express.Router();
 
 /* GET */
-router.get("/", participants.getAllParticipants);
+router.get("/", checkAuth, participants.getAllParticipants);
 //router.get("/", checkAuth, participants.getAllParticipants);
-router.get("/:id", participants.getOneParticipant);
+router.get("/:id", checkAuth, participants.getOneParticipant);
 //router.get("/:id", checkAuth, participants.getOneParticipant);
-router.get("/byname/:firstname/:lastname", participants.getParticipantByName); // NO OK
-router.get("/byemail/:email", participants.getParticipantByEmail);
-router.get("/byevent/:idEvent", participants.getParticipantByEvent);
+router.get(
+  "/byname/:firstname/:lastname",
+  checkAuth,
+  participants.getParticipantByName
+); // NO OK
+router.get("/byemail/:email", checkAuth, participants.getParticipantByEmail);
+router.get("/byevent/:idEvent", checkAuth, participants.getParticipantByEvent);
 
 /* POST */
-router.post("/", participants.createParticipant);
+router.post("/", checkAuth, participants.createParticipant);
 
 /* PUT */
-router.put("/:id", participants.updateParticipant);
+router.put("/:id", checkAuth, participants.updateParticipant);
 
 /* DELETE */
-router.delete("/:id", participants.deleteParticipant);
+router.delete("/:id", checkAuth, participants.deleteParticipant);
 
 module.exports = router;
